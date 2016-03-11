@@ -1,0 +1,11 @@
+FROM rails:4.2.5
+
+RUN apt-get -y update && \
+    apt-get -y install libreoffice imagemagick unzip && \
+    rm -rf /var/lib/apt/lists/* && \
+    mkdir -p /opt/fits && \
+    curl -fSL -o /opt/fits-0.6.2.zip http://projects.iq.harvard.edu/files/fits/files/fits-0.6.2.zip && \
+    cd /opt && \
+    unzip fits-0.6.2.zip && \
+    chmod +x fits-0.6.2/fits.sh
+
