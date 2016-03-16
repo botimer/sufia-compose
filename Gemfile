@@ -57,3 +57,18 @@ end
 
 gem 'rsolr', '~> 1.0.6'
 gem 'globalid'
+
+group :development, :test do
+end
+
+group :development, :test do
+end
+
+gem 'devise'
+gem 'devise-guests', '~> 0.3'
+group :development, :test do
+end
+
+group :development, :test do
+  gem 'rspec-rails'
+end
