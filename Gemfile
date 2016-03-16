@@ -52,6 +52,7 @@ gem 'sufia', git: 'https://github.com/projecthydra/sufia.git', branch: 'master'
 
 group :development, :test do
   gem 'solr_wrapper', '>= 0.3'
+  gem 'fcrepo_wrapper'
 end
 
 gem 'rsolr', '~> 1.0.6'

@@ -209,6 +209,8 @@ GEM
     extlib (0.9.16)
     faraday (0.9.2)
       multipart-post (>= 1.2, < 3)
+    fcrepo_wrapper (0.2.1)
+      ruby-progressbar
     font-awesome-rails (4.5.0.1)
       railties (>= 3.2, < 5.1)
     foreigner (1.7.4)
@@ -635,6 +637,7 @@ PLATFORMS
 DEPENDENCIES
   byebug
   coffee-rails (~> 4.1.0)
+  fcrepo_wrapper
   globalid
   jbuilder (~> 2.0)
   jquery-rails
