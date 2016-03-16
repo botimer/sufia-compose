@@ -1,7 +1,8 @@
 #FROM ruby:2.3
 #FROM rails:onbuild
 #FROM rails:4.2.5
-FROM sufia-base:4.2.5
+#FROM sufia-base:4.2.5
+FROM botimer/misc:sufia-base-425
 
 ENV APP_HOME /usr/src/app
 RUN mkdir -p $APP_HOME
