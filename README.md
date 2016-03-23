@@ -13,10 +13,10 @@ There are three Docker related files here:
 
 ### Setup
 
-_If you do not have Docker (and Compose) set up, read below._
+_If you do not have Docker (and Compose) set up, read [below](#basic-docker-installation-osx)._
 
-_Also, these examples use the `dc` alias for `docker-compose`. See below for
-more shell helpers._
+_Also, these examples use the `dc` alias for `docker-compose`. See
+below for more [shell helpers](#shell-helpers)._
 
 Ordinary usage will amount to starting the app and services with
 `docker-compose up`, but there a couple of setup steps for the first run. Because
@@ -51,7 +51,7 @@ script works locally, and `docker-compose run` creates temporary containers in
 isolation from anything already running. The solution is `docker exec`, which
 requires the generated container name/ID. Typically, this will be
 `sufiacompose_solr_1`, but it is best to look it up with `docker ps`. The
-easiest way to do this is to use the `de` function from the shell helpers
+easiest way to do this is to use the `de` function from the [shell helpers](#shell-helpers)
 below.
 
 ```
