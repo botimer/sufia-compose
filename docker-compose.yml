@@ -29,11 +29,15 @@ services:
         volumes:
           - ./solr/config:/opt/config
     fcrepo:
-        image: botimer/misc:fcrepo-45
+        image: lyrasis/fcrepo:4.5.0
+        volumes:
+            - fcrepo_data:/opt/data
         ports:
           - "8984:8080"
 
 volumes:
     bundle:
+        driver: local
+    fcrepo_data:
         driver: local
 

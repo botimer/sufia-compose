@@ -1,3 +1,7 @@
+# This is the Dockerfile for botimer/sufia-base. Pretty simple additions to the
+# rails image, despite the impressive size increase. There may be a way to
+# squash it down some.
+
 FROM rails:4.2.5
 
 RUN apt-get -y update && \
