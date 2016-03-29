@@ -46,6 +46,23 @@ function de() {
     docker exec -it $(dps $NAME | head -1) "$@"
 }
 
+function dsync() {
+    MACHINE=""
+    if [[ -n $1 ]]; then
+        MACHINE=$1
+    else
+        MACHINE="$(dm active)"
+    fi
+
+    HOST="$(dm ip $MACHINE)"
+    PORT=5000
+    if [[ -n $2 ]]; then
+        PORT=$2
+    fi
+
+    unison . socket://$HOST:$PORT/ -ignore 'Path .git' -ignore 'Path tmp' -auto -batch -prefer . -repeat watch -fastcheck true
+}
+
 alias dm='docker-machine'
 alias dc='docker-compose'
 

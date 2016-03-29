@@ -2,15 +2,12 @@ version: '2'
 services:
     web:
         build: .
-        working_dir: /unison
-        environment:
-            - APP_HOME=/unison
-            - BUNDLE_GEMFILE=/unison/Gemfile
         command: bin/rails server --port 3000 --binding 0.0.0.0
         ports:
             - "3000:3000"
         volumes:
-            #- .:/usr/src/app
+            # Mount the volume from the unison container instead of host path
+            # - .:/usr/src/app
             - bundle:/bundle
         volumes_from:
             - unison
@@ -42,10 +39,11 @@ services:
           - "8984:8080"
     unison:
         # image: leighmcculloch/unison
-        # image: ecc22beed337
         image: botimer/unison-fsmonitor
         environment:
-            - UNISON_VERSION=2.48.3
+            - UNISON_PATH=/usr/src/app
+        volumes:
+            - /usr/src/app
         ports:
             - "5000:5000"
 
