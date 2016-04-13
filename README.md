@@ -15,7 +15,7 @@ There are three Docker related files here:
 
 _If you do not have Docker (and Compose) set up, read [below](#basic-docker-installation-osx)._
 
-_Also, these examples use the `dc` alias for `docker-compose`. See
+_Also, these examples use the `hulk` alias for `docker-compose`. See
 below for more [shell helpers](#shell-helpers)._
 
 Ordinary usage will amount to starting the app and services with
@@ -25,9 +25,9 @@ to build the image first, then run Bundler, then start up. The web image is the
 only one that needs to be built, while the others will simply be pulled.
 
 ```
-dc build web
-dc run web bundle install
-dc up web
+hulk build web
+hulk run web bundle install
+hulk up web
 ```
 
 By running `docker-compose up web`, the dependent services will be started, but
@@ -43,7 +43,7 @@ differently. The database setup is a usual rake task, run in the web image (a
 new, throwaway container is fine).
 
 ```
-dc run web rake db:create db:migrate
+hulk run web rake db:create db:migrate
 ```
 
 The Solr core must be run in the existing container because the `bin/solr`
@@ -68,12 +68,12 @@ There are some differences from local development with Rails, but they are not
 very involved. Just as with local development, sometimes you must run `bundle
 install` or restart `rails server`. One-off Bundler commands or rake tasks can
 be run in their own container. This is the `docker-compose run` pattern. For
-examples (using the `dc` alias):
+examples (using the `hulk` alias):
 
 ```
-dc run web bundle install
-dc run web rake db:migrate
-dc run web rails c
+hulk run web bundle install
+hulk run web rake db:migrate
+hulk run web rails c
 ```
 
 Each of these commands says to create a new container using the web service
@@ -83,10 +83,10 @@ container, so files outside of mounted directories or system state (like
 installed packages) will be discarded upon exit.
 
 Restarting the Rails server is straightforward. Assuming you have started it
-with `dc up web` and still have a shell connected, Control-C will terminate it,
-and you can simply run `dc up web` again. If there was some abnormal
+with `hulk up web` and still have a shell connected, Control-C will terminate it,
+and you can simply run `hulk up web` again. If there was some abnormal
 termination (like a system or VM crash), you may be warned and have to remove
-`tmp/pids/server.pid`. You can force all services to stop with `dc stop`.
+`tmp/pids/server.pid`. You can force all services to stop with `hulk stop`.
 
 
 ### Workflow on Windows
@@ -157,7 +157,7 @@ It calls `dme`, which is short for `docker-machine env`. If in your
 login/profile, this will activate the default machine automatically in each new
 shell, if it is running.
 
-The main two helpers are the aliases `dm` and `dc`, for `docker-machine` and
+The main two helpers are the aliases `dm` and `hulk`, for `docker-machine` and
 `docker-compose`, respectively. These are the most commonly used commands and
 also the least wrist- and tab-completion-friendly, so the short aliases are a
 large quality of life improvement with no magic to them.
