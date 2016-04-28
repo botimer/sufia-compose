@@ -132,19 +132,22 @@ once. It will be your normal shell, but activating the default machine. You can
 use a regular terminal afterwards and activate the machine manually or choose to
 use the quickstart.
 
-Because the VirtualBox shared folders are quite slow, NFS mounting is
-recommended. This is straightforward with the
-[docker-machine-nfs](https://github.com/adlogix/docker-machine-nfs) utility,
-available with Hombrew.  The documentation and output from the script are quite
-good, and it should run without any issues. It's possible that there may be
-conflicts with exports from Vagrant, but unlikely. Contact me if this happens.
+Because the VirtualBox shared folders are quite slow, Unison mounting is
+recommended. The Compose file already has a `unison` container and volume set
+up, and the `web` container uses this volume for `/usr/src/app`.
+
+Installing Unison is one step:
 
 ```
-brew install docker-machine-nfs
-docker-machine-nfs default
+brew install unison
 ```
 
-__NOTE: There is a promising rsync-based alternative to NFS here: https://github.com/brikis98/docker-osx-dev__
+The `web` container will not start until the app files are synced. You can work
+around this by using `dc start unison` to start it without the rest of the
+containers. Then, to sync, there is a helper function in `docker-profile.sh`
+called `dsync`, which runs a Unison sync from the current directory to the
+Docker Machine IP. It stays resident and monitors changes bidirectionally,
+so this should be run in a separate shell and stay running during development.
 
 ## Shell Helpers
 
