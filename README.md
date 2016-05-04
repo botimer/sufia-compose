@@ -142,6 +142,18 @@ Installing Unison is one step:
 brew install unison
 ```
 
+For the "watching" mode to work, a `unison-fsmonitor` needs to be on your PATH.
+The easiest way to do this is to install Python `watchdog` and `unox`. If you
+already have `pip` installed and working, the first step can be skipped and the
+`--user` flag can be omitted.
+
+```
+easy_install --user pip
+pip install --user watchdog
+curl -o /usr/local/bin/unison-fsmonitor https://raw.githubusercontent.com/botimer/unox/master/unox.py
+chmod +x /usr/local/bin/unison-fsmonitor
+```
+
 The `web` container will not start until the app files are synced. You can work
 around this by using `dc start unison` to start it without the rest of the
 containers. Then, to sync, there is a helper function in `docker-profile.sh`
