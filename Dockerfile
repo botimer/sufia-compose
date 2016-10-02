@@ -1,4 +1,4 @@
-FROM botimer/sufia-base:7.0
+FROM botimer/sufia-base:7.2
 
 ENV APP_HOME /usr/src/app
 RUN mkdir -p $APP_HOME
