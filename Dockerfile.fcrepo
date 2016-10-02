@@ -1,0 +1,23 @@
+# Taken directly from https://github.com/lyrasis/docker-fcrepo/blob/master/release/Dockerfile
+# Apparently, Mark is no longer pushing new images, so this release Dockerfile allows us to
+# readily build and push one for a given version.
+
+FROM jetty:9-jre8
+
+MAINTAINER mark.cooper@lyrasis.org
+
+ARG FCREPO_VERSION
+
+ENV FCREPO_HOME=/opt/data \
+  FCREPO_NAME=fcrepo \
+  FCREPO_VERSION=${FCREPO_VERSION:-4.5.0} \
+  JETTY_WEBAPPS=/var/lib/jetty/webapps
+
+ENV FCREPO_URL https://github.com/fcrepo4/fcrepo4/releases/download/fcrepo-${FCREPO_VERSION}/fcrepo-webapp-${FCREPO_VERSION}.war
+
+RUN wget -O ${JETTY_WEBAPPS}/${FCREPO_NAME}.war $FCREPO_URL
+RUN mkdir $FCREPO_HOME && chown -R jetty:jetty $FCREPO_HOME
+
+VOLUME ["$FCREPO_HOME"]
+
+CMD ["java","-Dfcrepo.home=/opt/data","-jar","/usr/local/jetty/start.jar"]

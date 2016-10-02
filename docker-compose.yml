@@ -32,7 +32,7 @@ services:
         volumes:
           - ./solr/config:/opt/config
     fcrepo:
-        image: lyrasis/fcrepo:4.5.0
+        image: botimer/fcrepo:4.5.1
         volumes:
             - fcrepo_data:/opt/data
         ports:
