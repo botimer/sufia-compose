@@ -1,15 +1,16 @@
 # This is the Dockerfile for botimer/sufia-base. Pretty simple additions to the
-# rails image, despite the impressive size increase. There may be a way to
+# ruby image, despite the impressive size increase. There may be a way to
 # squash it down some.
 
-FROM rails:4.2.5
+FROM ruby:2.3
 
 RUN apt-get -y update && \
-    apt-get -y install libreoffice imagemagick unzip && \
-    rm -rf /var/lib/apt/lists/* && \
+    apt-get -y install nodejs libreoffice imagemagick unzip && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* && \
     mkdir -p /opt/fits && \
-    curl -fSL -o /opt/fits-0.6.2.zip http://projects.iq.harvard.edu/files/fits/files/fits-0.6.2.zip && \
+    curl -fSL -o /opt/fits-0.8.5.zip http://projects.iq.harvard.edu/files/fits/files/fits-0.8.5.zip && \
     cd /opt && \
-    unzip fits-0.6.2.zip && \
-    chmod +x fits-0.6.2/fits.sh
+    unzip fits-0.8.5.zip && \
+    chmod +x fits-0.8.5/fits.sh
 

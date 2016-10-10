@@ -1,11 +1,12 @@
 # Sufia under Docker (test app)
 
 This is a very basic example/test of running a Sufia-based app under Docker.
-There are three Docker related files here:
+There are four Docker related files here:
 
  * Dockerfile - the main Rails app
- * Dockerfile.base - the base image, building on the official Rails image,
-   adding Sufia runtime dependencies
+ * Dockerfile.base - the base image, building on the official Ruby image,
+   adding Sufia runtime dependencies (already on Docker Hub)
+ * Dockerfile.fcrepo - a Dockerfile to make Fedora 4 images (also on Docker Hub)
  * docker-compose.yml - A Compose file for bringing up all the backend services
    needed and a Rails server
 
@@ -99,6 +100,9 @@ Babun (mintty) appears promising; more details TBD.
 
 ## Basic Docker Installation (OSX)
 
+_NOTE: Since Docker 1.12, Docker for Mac is probably. These docs are left here
+until I get a chance to test its performance better._
+
 The easiest way to get a nice setup is to use [Docker Toolbox](https://www.docker.com/products/docker-toolbox).
 The easiest way to install Docker Toolbox is with [Homebrew](http://brew.sh)/[Caskroom](https://caskroom.github.io).
 If you need to set either of these up, they are each one-liners at the shell.
@@ -108,7 +112,7 @@ If you need to set either of these up, they are each one-liners at the shell.
 brew tap caskroom/cask
 ```
 
-If Hombrew is installed under a managed environment, you may need to do some
+If Homebrew is installed under a managed environment, you may need to do some
 setup like adding your user to the appropriate group and creating a user-owned
 cache directory. For example:
 
@@ -136,6 +140,9 @@ Because the VirtualBox shared folders are quite slow, Unison mounting is
 recommended. The Compose file already has a `unison` container and volume set
 up, and the `web` container uses this volume for `/usr/src/app`.
 
+_Again, note that the native file sharing support in Docker for Mac may make
+Unison setup unnecessary for typical development._
+
 Installing Unison is one step:
 
 ```
@@ -160,6 +167,10 @@ containers. Then, to sync, there is a helper function in `docker-profile.sh`
 called `dsync`, which runs a Unison sync from the current directory to the
 Docker Machine IP. It stays resident and monitors changes bidirectionally,
 so this should be run in a separate shell and stay running during development.
+
+Note that both the Unison service and `dsync` use port 5000 by default. This
+would cause conflicts if trying to run multiple applications with this pattern
+unless specifying alternate ports.
 
 ## Shell Helpers
 

@@ -1,8 +1,11 @@
 source 'https://rubygems.org'
 
+gem 'sufia', '7.2.0'
+gem 'flipflop', git: 'https://github.com/jcoyne/flipflop.git', branch: 'hydra'
+gem 'puma'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '4.2.5'
+gem 'rails', '4.2.7.1'
 # Use sqlite3 as the database for Active Record
 gem 'sqlite3'
 gem 'mysql2'
@@ -18,14 +21,11 @@ gem 'coffee-rails', '~> 4.1.0'
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
-#gem 'turbolinks'
+gem 'turbolinks'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 2.0'
 # bundle exec rake doc:rails generates the API under doc/api.
 gem 'sdoc', '~> 0.4.0', group: :doc
-
-gem 'puma'
-gem 'slim'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
@@ -49,27 +49,15 @@ group :development do
   gem 'spring'
 end
 
-gem 'sufia', git: 'https://github.com/projecthydra/sufia.git', branch: 'master'
 
 group :development, :test do
   gem 'solr_wrapper', '>= 0.3'
-  gem 'fcrepo_wrapper'
 end
 
-gem 'rsolr', '~> 1.0.6'
-gem 'globalid'
-
-group :development, :test do
-end
-
-group :development, :test do
-end
-
+gem 'rsolr', '~> 1.0'
 gem 'devise'
-gem 'devise-guests', '~> 0.3'
+gem 'devise-guests', '~> 0.5'
 group :development, :test do
-end
-
-group :development, :test do
+  gem 'fcrepo_wrapper'
   gem 'rspec-rails'
 end

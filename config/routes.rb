@@ -1,21 +1,17 @@
 Rails.application.routes.draw do
-
-          mount Blacklight::Engine => '/'
+  Hydra::BatchEdit.add_routes(self)
+  mount Qa::Engine => '/authorities'
 
   
-  concern :searchable, Blacklight::Routes::Searchable.new
+  mount Blacklight::Engine => '/'
+  
+    concern :searchable, Blacklight::Routes::Searchable.new
 
-resource :catalog, only: [:index], as: 'catalog', path: '/catalog', controller: 'catalog' do
-  concerns :searchable
-end
+  resource :catalog, only: [:index], as: 'catalog', path: '/catalog', controller: 'catalog' do
+    concerns :searchable
+  end
 
   devise_for :users
-  Hydra::BatchEdit.add_routes(self)
-  # This must be the very last route in the file because it has a catch-all route for 404 errors.
-  # This behavior seems to show up only in production mode.
-  mount Sufia::Engine => '/'
-
-  mount Hydra::Collections::Engine => '/'
   mount CurationConcerns::Engine, at: '/'
   resources :welcome, only: 'index'
   root 'sufia/homepage#index'
@@ -24,33 +20,18 @@ end
   curation_concerns_embargo_management
   concern :exportable, Blacklight::Routes::Exportable.new
 
-resources :solr_documents, only: [:show], path: '/catalog', controller: 'catalog' do
-  concerns :exportable
-end
-
-resources :bookmarks do
-  concerns :exportable
-
-  collection do
-    delete 'clear'
+  resources :solr_documents, only: [:show], path: '/catalog', controller: 'catalog' do
+    concerns :exportable
   end
-end
 
-  concern :exportable, Blacklight::Routes::Exportable.new
+  resources :bookmarks do
+    concerns :exportable
 
-resources :solr_documents, only: [:show], path: '/catalog', controller: 'catalog' do
-  concerns :exportable
-end
-
-resources :bookmarks do
-  concerns :exportable
-
-  collection do
-    delete 'clear'
+    collection do
+      delete 'clear'
+    end
   end
-end
 
-  #root 'home#index'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
@@ -105,4 +86,6 @@ end
   #     # (app/controllers/admin/products_controller.rb)
   #     resources :products
   #   end
+
+ mount Sufia::Engine => '/'
 end

@@ -1,6 +1,6 @@
 class ApplicationController < ActionController::Base
   helper Openseadragon::OpenseadragonHelper
-  # Adds a few additional behaviors into the application controller 
+  # Adds a few additional behaviors into the application controller
   include Blacklight::Controller
   include Hydra::Controller::ControllerBehavior
 
@@ -10,7 +10,7 @@ class ApplicationController < ActionController::Base
   include Sufia::Controller
 
   include CurationConcerns::ThemedLayoutController
-  layout 'sufia-one-column'
+  with_themed_layout '1_column'
 
 
   # Prevent CSRF attacks by raising an exception.
